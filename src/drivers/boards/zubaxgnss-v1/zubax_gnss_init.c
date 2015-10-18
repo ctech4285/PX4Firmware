@@ -112,15 +112,6 @@ __EXPORT void stm32_boardinitialize(void)
 {
 	/* configure LEDs */
 	board_led_initialize();
-
-	/* configure remapping */
-	unsigned mapr = getreg32(STM32_AFIO_MAPR);
-
-	mapr &= ~AFIO_MAPR_SWJ_CFG_MASK;                // these bits are write-only
-	mapr |= AFIO_MAPR_SWDP;                         // SWD enabled, JTAG disabled
-	mapr |= 2 << AFIO_MAPR_CAN1_REMAP_SHIFT;        // CAN1 remapping
-
-	putreg32(mapr, STM32_AFIO_MAPR);
 }
 
 

@@ -91,16 +91,28 @@
 
 __EXPORT void stm32_boardinitialize(void)
 {
+	stm32_configgpio(GPIO_INPUT|GPIO_CNF_INFLOAT|GPIO_MODE_INPUT|GPIO_PORTB|GPIO_PIN8);
+	stm32_configgpio(GPIO_ALT|GPIO_CNF_AFPP|GPIO_MODE_50MHz|GPIO_PORTB|GPIO_PIN9);
+
+	stm32_configgpio(GPIO_LED_CAN1);
+	stm32_configgpio(GPIO_LED_CAN2);
+	stm32_configgpio(GPIO_LED_INFO);
+
+	/* configure remapping */
+	unsigned mapr = getreg32(STM32_AFIO_MAPR);
+
+	mapr &= ~AFIO_MAPR_SWJ_CFG_MASK;                // these bits are write-only
+	mapr |= AFIO_MAPR_SWDP;                         // SWD enabled, JTAG disabled
+	mapr |= 2 << AFIO_MAPR_CAN1_REMAP_SHIFT;        // CAN1 remapping
+
+	putreg32(mapr, STM32_AFIO_MAPR);
+
 	putreg32(getreg32(STM32_RCC_APB1ENR) | RCC_APB1ENR_CAN1EN, STM32_RCC_APB1ENR);
-	stm32_configgpio(GPIO_CAN1_RX);
-	stm32_configgpio(GPIO_CAN1_TX);
+
 	putreg32(getreg32(STM32_RCC_APB1RSTR) | RCC_APB1RSTR_CAN1RST,
 		 STM32_RCC_APB1RSTR);
 	putreg32(getreg32(STM32_RCC_APB1RSTR) & ~RCC_APB1RSTR_CAN1RST,
 		 STM32_RCC_APB1RSTR);
-	stm32_configgpio(GPIO_LED_CAN1);
-	stm32_configgpio(GPIO_LED_CAN2);
-	stm32_configgpio(GPIO_LED_INFO);
 
 #if defined(OPT_WAIT_FOR_GETNODEINFO_JUMPER_GPIO)
 	stm32_configgpio(GPIO_GETNODEINFO_JUMPER);
