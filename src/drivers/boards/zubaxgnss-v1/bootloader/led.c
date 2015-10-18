@@ -63,7 +63,6 @@ static void led_process(bl_timer_id id, void *context)
         stm32_gpiowrite(GPIO_LED_INFO, led_a ? toggle : false);
         stm32_gpiowrite(GPIO_LED_CAN1, led_b ? toggle : false);
         stm32_gpiowrite(GPIO_LED_CAN2, led_c ? toggle : false);
-
 }
 
 

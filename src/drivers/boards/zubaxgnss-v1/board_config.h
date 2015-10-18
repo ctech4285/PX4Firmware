@@ -77,21 +77,18 @@ __BEGIN_DECLS
  *                                                          Pin #      Name
  * -- ----- --------------------------------             ----------------------
  *
- *  PB[00] ADC12_IN8/TIM3_CH3/ETH_MII_RXD2/TIM1_CH2N        26       LED4
- *  PC[04] ADC12_IN14/ETH_MII_RXD0(8)/ETH_RMII_RXD0         24       LED3
- *  PC[05] ADC12_IN15/ETH_MII_RXD1(8)/ETH_RMII_RXD1         25       LED2
  */
 
-#define GPIO_LED2       (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-                        GPIO_PORTC | GPIO_PIN5 | GPIO_OUTPUT_CLEAR)
+#define GPIO_LED2       (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_2MHz | \
+                        GPIO_PORTB | GPIO_PIN5 | GPIO_OUTPUT_CLEAR)
 #define GPIO_LED_CAN1   GPIO_LED2
 
-#define GPIO_LED3       (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-                        GPIO_PORTC | GPIO_PIN4 | GPIO_OUTPUT_CLEAR)
+#define GPIO_LED3       (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_2MHz | \
+                        GPIO_PORTB | GPIO_PIN4 | GPIO_OUTPUT_CLEAR)
 #define GPIO_LED_CAN2   GPIO_LED3
 
-#define GPIO_LED4       (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_50MHz | \
-                        GPIO_PORTB | GPIO_PIN0 | GPIO_OUTPUT_CLEAR)
+#define GPIO_LED4       (GPIO_OUTPUT | GPIO_CNF_OUTPP | GPIO_MODE_2MHz | \
+                        GPIO_PORTB | GPIO_PIN3 | GPIO_OUTPUT_CLEAR)
 #define GPIO_LED_INFO   GPIO_LED4
 
 /* SPI ***************************************************************************
