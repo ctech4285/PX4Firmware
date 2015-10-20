@@ -105,6 +105,13 @@ SECTIONS
     CONSTRUCTORS
     _edata = ABSOLUTE(.);
   } > sram AT > flash
+  
+  /* http://blog.hrbacek.info/2013/12/28/filling-unused-memory-area-using-gnu-linker-script */
+  .fill LOADADDR(.data) + (_edata - _sdata) : ALIGN(4) {
+    FILL(0xFFFFFFFF);
+    . = ORIGIN(flash) + LENGTH(flash) - 1;
+    BYTE(0xFF)
+  } > flash
 
   .bss : {
     _sbss = ABSOLUTE(.);
