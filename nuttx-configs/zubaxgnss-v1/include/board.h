@@ -57,24 +57,24 @@
 
 /* HSI - 8 MHz RC factory-trimmed
  * LSI - 40 KHz RC (30-60KHz, uncalibrated)
- * HSE - On-board crystal frequency is 8MHz
+ * HSE - On-board crystal frequency is 16MHz
  * LSE - 32.768 kHz
  */
 
-#define STM32_BOARD_XTAL        8000000ul
+#define STM32_BOARD_XTAL        16000000ul
 
-#define STM32_HSI_FREQUENCY     8000000ul
+#define STM32_HSI_FREQUENCY     16000000ul
 #define STM32_LSI_FREQUENCY     40000
 #define STM32_HSE_FREQUENCY     STM32_BOARD_XTAL
 #define STM32_LSE_FREQUENCY     32768
 
-/* PLL source is HSE/2, PLL multipler is 10: PLL frequency is 8MHz (XTAL) x 10 = 40MHz */
+/*  */
 
-#define STM32_PLL_PREDIV2       RCC_CFGR2_PREDIV2d2   /* 8MHz / 2  =>  4MHz */
+#define STM32_PLL_PREDIV2       RCC_CFGR2_PREDIV2d4   /* 16MHz / 4  =>  4MHz */
 #define STM32_PLL_PLL2MUL       RCC_CFGR2_PLL2MULx10  /* 4MHz * 10 => 40MHz */
 #define STM32_PLL_PREDIV1       RCC_CFGR2_PREDIV1d5   /* 40MHz / 5 => 8MHz */
 #define STM32_PLL_PLLMUL        RCC_CFGR_PLLMUL_CLKx9 /* 8MHz * 9  => 72Mhz */
-#define STM32_PLL_FREQUENCY     (9*STM32_BOARD_XTAL)
+#define STM32_PLL_FREQUENCY     (72000000ul)
 
 /* SYCLLK and HCLK are the PLL frequency */
 
